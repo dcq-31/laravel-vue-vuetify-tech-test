@@ -4,6 +4,7 @@ import { useDisplay } from "vuetify";
 import type { User } from "@/types/index";
 import UsersOverview from "@/components/UsersOverview.vue";
 import { useServices } from "@/services";
+import { useError } from "@/composables";
 
 const $services = useServices();
 const { smAndDown } = useDisplay();
@@ -32,19 +33,27 @@ async function submit() {
 }
 
 async function getUsers() {
-    const { data } = await $services.list();
-    data.data.forEach(async (d) => {
-        users.value.push({
-            ...d,
-            country: (await getCountry(d)).country_id,
+    try {
+        const { data } = await $services.list();
+        data.data.forEach(async (d) => {
+            users.value.push({
+                ...d,
+                country: (await getCountry(d)).country_id,
+            });
         });
-    });
+    } catch (error) {
+        useError(error);
+    }
 }
 
 async function getCountry(user: User) {
-    const { data } = await $services.getCountry(user.name);
+    try {
+        const { data } = await $services.getCountry(user.name);
 
-    return data.country[0];
+        return data.country[0];
+    } catch (error) {
+        useError(error);
+    }
 }
 
 onBeforeMount(() => {
