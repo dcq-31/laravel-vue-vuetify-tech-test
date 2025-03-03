@@ -11,10 +11,10 @@ const averageAge = computed(() => {
 });
 
 const totalMales = computed(
-    () => props.users.filter((user) => user.gender === "M").length
+    () => props.users.filter((user) => user.gender === "Masculino").length
 );
 const totalFemales = computed(
-    () => props.users.filter((user) => user.gender === "F").length
+    () => props.users.filter((user) => user.gender === "Femenino").length
 );
 
 const youngestPerson = computed(() =>
@@ -34,40 +34,42 @@ const oldestPerson = computed(() =>
 <template>
     <v-container>
         <v-card>
-            <v-card-title>User Information</v-card-title>
+            <v-card-title>Información del usuario</v-card-title>
             <v-card-text>
                 <v-row>
                     <v-col>
                         <v-alert variant="outlined" type="info">
-                            <strong>Average Age:</strong> {{ averageAge }} years
+                            <strong>Edad Promedio:</strong>
+                            {{ averageAge }} años
                         </v-alert>
                     </v-col>
                     <v-col>
                         <v-alert variant="outlined" type="info">
-                            <strong>Total Males:</strong> {{ totalMales }}
+                            <strong>Total de Masculinos:</strong>
+                            {{ totalMales }}
                         </v-alert>
                     </v-col>
                     <v-col>
                         <v-alert variant="outlined" type="info">
-                            <strong>Total Females:</strong> {{ totalFemales }}
+                            <strong>Total Femenino:</strong> {{ totalFemales }}
                         </v-alert>
                     </v-col>
                 </v-row>
                 <v-row>
                     <v-col>
                         <v-alert variant="outlined" type="success">
-                            <strong>Youngest Person:</strong>
+                            <strong>Persona más joven:</strong>
                             {{ youngestPerson?.name }} ({{
                                 youngestPerson?.age
                             }}
-                            years)
+                            años)
                         </v-alert>
                     </v-col>
                     <v-col>
                         <v-alert variant="outlined" type="warning">
-                            <strong>Oldest Person:</strong>
+                            <strong>Persona más vieja:</strong>
                             {{ oldestPerson?.name }} ({{ oldestPerson?.age }}
-                            years)
+                            años)
                         </v-alert>
                     </v-col>
                 </v-row>
