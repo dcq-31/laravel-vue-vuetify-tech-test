@@ -38,7 +38,7 @@ async function getUsers() {
         data.data.forEach(async (d) => {
             users.value.push({
                 ...d,
-                country: (await getCountry(d)).country_id,
+                country: (await getCountry(d))?.country_id,
             });
         });
     } catch (error) {
